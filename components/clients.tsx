@@ -17,9 +17,10 @@ import Client09 from '@/public/images/client-09.svg'
 // Import Swiper
 import Swiper, { Autoplay } from 'swiper'
 import 'swiper/swiper.min.css'
+import { getClientImages } from '@/content/queries'
 Swiper.use([Autoplay])
 
-export default function Clients() {
+export default function Clients({ images }: { images: ClientImagesQuery['assetCollection']['items']}) {
 
   useEffect(() => {
     const carousel = new Swiper('.clients-carousel', {
@@ -53,7 +54,14 @@ export default function Clients() {
             <div className="clients-carousel swiper-container relative before:absolute before:inset-0 before:w-32 before:z-10 before:pointer-events-none before:bg-gradient-to-r before:from-slate-900 after:absolute after:inset-0 after:left-auto after:w-32 after:z-10 after:pointer-events-none after:bg-gradient-to-l after:from-slate-900">
               <div className="swiper-wrapper !ease-linear select-none items-center">
                 {/* Carousel items */}
-                <div className="swiper-slide !w-auto">
+                {
+                  images.map((image) => (
+                    <div key={image.url} className='swiper-slide !w-auto'>
+                      <Image src={image.url} alt={image.title} width={image.width} height={image.height} />
+                    </div>
+                  ))
+                }
+                {/* <div className="swiper-slide !w-auto">
                   <Image src={Client01} alt="Client 01" width={110} height={21} />
                 </div>
                 <div className="swiper-slide !w-auto">
@@ -79,7 +87,7 @@ export default function Clients() {
                 </div>
                 <div className="swiper-slide !w-auto">
                   <Image className="mt-2" src={Client09} alt="Client 09" width={92} height={28} />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

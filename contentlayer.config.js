@@ -22,11 +22,11 @@ const Update = defineDocumentType(() => ({
     slug: {
       type: 'string',
       resolve: (doc) => doc._raw.flattenedPath.replace(/update\/?/, ''),
-    },    
+    },
   },
 }))
 
 export default makeSource({
-  contentDirPath: 'content',
+  contentDirPath: 'content_old',
   documentTypes: [Update],
 })
